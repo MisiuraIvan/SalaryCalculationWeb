@@ -32,6 +32,21 @@ public class User {
         this.userId=userId;
     }
 
+    public User(Long id,String firstname, String lastname, String middlename, String login, String password) {
+        this.userId=id;
+        this.firstName=firstname;
+        this.lastName=lastname;
+        this.middleName=middlename;
+        this.login=login;
+        this.password=password;
+    }
+    public User(Long id,String firstname, String lastname, String middlename, String login) {
+        this.userId=id;
+        this.firstName=firstname;
+        this.lastName=lastname;
+        this.middleName=middlename;
+        this.login=login;
+    }
     public Post getPost() {
         return post;
     }

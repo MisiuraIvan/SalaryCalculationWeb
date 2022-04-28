@@ -44,10 +44,19 @@ public class AdminController {
         return "mainadmin";
     }
     @PostMapping("/admin/{id}")
-    public String changeData(@PathVariable(value = "id") Long id, Model model) {
+    public String changeData(@PathVariable(value = "id") Long id, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String middlename, @RequestParam String login, @RequestParam String password, @RequestParam String newpassword, Model model) {
         Optional<User> user = userRepository.findById(id);
         model.addAttribute("user", user.get());
-        return "mainadmin";
+        if(password=="" || newpassword==""){
+            User user1 = new User(id,firstname,lastname,middlename,login,user.get().getPassword(),user.get().getPost());
+            userRepository.save(user1);
+        }else{
+            if(user.get().getPassword().equals(password)){
+                User user1 = new User(id,firstname,lastname,middlename,login,newpassword,user.get().getPost());
+                userRepository.save(user1);
+            }
+        }
+        return "redirect:/admin/{id}";
     }
 
     @GetMapping("/admin/analystics/{id}")
