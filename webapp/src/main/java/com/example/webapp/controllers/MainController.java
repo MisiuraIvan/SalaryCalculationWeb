@@ -26,8 +26,8 @@ public class MainController {
     @PostMapping("/")
     public String login(@RequestParam String login, @RequestParam String password, Model model){
         Optional<User> user = userRepository.findUserByLoginAndPassword(login,password);
-        Long id=user.get().getUserId();
         if(user.isPresent()){
+            Long id=user.get().getUserId();
             switch(user.get().getPost().getPost()){
                 case "Директор": return "redirect:/admin/"+id.toString();
                 case "Бухгалтер": return "redirect:/accounter/"+id.toString();
