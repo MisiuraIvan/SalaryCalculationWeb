@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список табелей</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="../static/css/adminmain.css" th:href="@{/css/adminmain.css}" rel="stylesheet" />
+</head>
+<body>
+<adminheader th:insert="adminheader::adminheader"></adminheader>
+<div class="form3">
+    <h4 class="mb-3">Список табелей</h4>
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-sm-3">
+                <label class="form-label">Номер</label>
+                <input type="text" class="form-control" placeholder=""id="idd"name="idd" onchange="setPost()" required="">
+                <script th:inline="javascript">
+                    function setPost(){
+                        var vposts = [[${timesheets}]];
+                        let i;
+                        for(i=0;i<vposts.length;i++) {
+                            if(vposts[i].timeSheetId== document.getElementById("idd").value) {
+                                document.getElementById("emp").value =vposts[i].user.firstName+" "+vposts[i].user.lastName+" "+vposts[i].user.middleName;
+                                document.getElementById("year").value = vposts[i].date.year;
+                                document.getElementById("worktime").value =vposts[i].worktime;
+                                document.getElementById("month").value = vposts[i].date.month;
+                                document.getElementById("overtime").value =vposts[i].overtime;
+                                document.getElementById("holiday").value = vposts[i].holiday;
+                                document.getElementById("sickleave").value = vposts[i].sickleave;
+                                document.getElementById("hidden").value = document.getElementById("idd").value;
+                                break;
+                            }
+                        }
+                        if(i==vposts.length){
+                            document.getElementById("emp").value ="";
+                            document.getElementById("year").value = "";
+                            document.getElementById("worktime").value ="";
+                            document.getElementById("month").value = "";
+                            document.getElementById("overtime").value ="";
+                            document.getElementById("holiday").value = "";
+                            document.getElementById("sickleave").value = "";
+                            document.getElementById("hidden").value = "";
+                        }
+                    }
+                </script>
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label  class="form-label">Сотрудник</label>
+                <input type="text" class="form-control" placeholder=""id="emp"name="emp"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label">Месяц</label>
+                <input type="text" class="form-control" placeholder=""id="month"name="month"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label">Год</label>
+                <input type="text" class="form-control" placeholder=""id="year"name="year"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label">Рабочее время</label>
+                <input type="text" class="form-control" placeholder=""id="worktime"name="worktime"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label">Больничные</label>
+                <input type="text" class="form-control" placeholder=""id="sickleave"name="sickleave"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label">Отпуск</label>
+                <input type="text" class="form-control" placeholder=""id="holiday"name="holiday"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <label class="form-label">Переработки</label>
+                <input type="text" class="form-control" placeholder=""id="overtime"name="overtime"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" >Добавить/Редактировать</button>
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </form>
+    <br>
+    <form method="post" th:action="'/timesheet/delete/'+${user.userId}">
+        <div class="row g-3">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <input class="hidden" type="text" id="hidden" name="hidden">
+                <button class="w-100 btn btn-primary btn-lg" type="">Удалить</button>
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </form>
+    <hr class="my-4">
+</div>
+<timesheettable th:insert="timesheettable::timesheettable"></timesheettable>
+</body>
+</html>

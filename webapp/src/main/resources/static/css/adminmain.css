@@ -1,0 +1,33 @@
+.form2 {
+    margin: auto;
+    width: 50%;
+}
+h4{
+    margin: auto;
+}
+.form3 {
+    margin: auto;
+    width: 90%;
+}
+.form4 {
+    margin: auto;
+    width: 60%;
+}
+.hidden{
+    display: none;
+}
+.table{
+    text-align: center;
+    margin: auto;
+}
+.poststable{
+    width: 60%;
+}
+.datestable{
+    width: 70%;
+}
+a{
+    margin: 0px 10px;
+    font-weight: bold;
+    padding-right: 10px;
+}

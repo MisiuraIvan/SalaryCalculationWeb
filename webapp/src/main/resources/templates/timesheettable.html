@@ -1,0 +1,26 @@
+<div th:fragment="timesheettable">
+    <table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Сотрудник</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Рабочее время</th>
+        <th scope="col">Больничные</th>
+        <th scope="col">Отпуск</th>
+        <th scope="col">Переработки</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="el:${timesheets}">
+        <th th:text="${el.timeSheetId}" scope="row"></th>
+        <th th:text="${el.user.firstName}+' '+${el.user.lastName}+' '+${el.user.middleName}" scope="row"></th>
+        <th th:text="${el.date.month}+' '+${el.date.year}"scope="row"></th>
+        <th th:text="${el.worktime}"scope="row"></th>
+        <th th:text="${el.sickleave}"scope="row"></th>
+        <th th:text="${el.holiday}"scope="row"></th>
+        <th th:text="${el.overtime}"scope="row"></th>
+    </tr>
+    </tbody>
+    </table>
+</div>

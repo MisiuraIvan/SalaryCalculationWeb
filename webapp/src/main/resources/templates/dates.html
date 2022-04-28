@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Список дат</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link href="../static/css/adminmain.css" th:href="@{/css/adminmain.css}" rel="stylesheet" />
+</head>
+<body>
+<adminheader th:insert="adminheader::adminheader"></adminheader>
+<div class="form3">
+    <h4 class="mb-3">Список должностей</h4>
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-sm-6">
+                <label class="form-label">Номер</label>
+                <input type="text" class="form-control" placeholder=""id="idd"name="idd" onchange="setDate()" required="">
+                <script th:inline="javascript">
+                    function setDate(){
+                        var vposts = [[${dates}]];
+                        let i;
+                        for(i=0;i<vposts.length;i++) {
+                            if(vposts[i].dateId== document.getElementById("idd").value) {
+                                document.getElementById("month").value =vposts[i].month;
+                                document.getElementById("year").value = vposts[i].year;
+                                document.getElementById("hours").value = vposts[i].workHours;
+                                document.getElementById("hidden").value = document.getElementById("idd").value;
+                                break;
+                            }
+                        }
+                        if(i==vposts.length){
+                            document.getElementById("month").value = "";
+                            document.getElementById("year").value = "";
+                            document.getElementById("hours").value = "";
+                        }
+                    }
+                </script>
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label  class="form-label">Месяц</label>
+                <input type="text" class="form-control" placeholder=""id="month"name="month"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label class="form-label">Год</label>
+                <input type="text" class="form-control" placeholder=""id="year"name="year"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <label class="form-label">Рабочие часы</label>
+                <input type="text" class="form-control" placeholder=""id="hours"name="hours"  required="">
+                <div class="invalid-feedback">
+                    Valid first name is required.
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" >Добавить/Редактировать</button>
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </form>
+    <br>
+    <form method="post" th:action="'/date/delete/'+${user.userId}">
+        <div class="row g-3">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <input class="hidden" type="text" id="hidden" name="hidden">
+                <button class="w-100 btn btn-primary btn-lg" type="">Удалить</button>
+                <div class="invalid-feedback">
+                    Valid last name is required.
+                </div>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </form>
+    <hr class="my-4">
+</div>
+<table class="table table-striped datestable">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Месяц</th>
+        <th scope="col">Год</th>
+        <th scope="col">Часы</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="el:${dates}">
+        <th th:text="${el.dateId}" scope="row"></th>
+        <th th:text="${el.month}"></th>
+        <th th:text="${el.year}"></th>
+        <th th:text="${el.workHours}"></th>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<div th:fragment="salarytable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Номер табеля</th>
+            <th scope="col">Премия</th>
+            <th scope="col">Зарплата</th>
+            <th scope="col">Подоходный</th>
+            <th scope="col">Пенсионные</th>
+            <th scope="col">Чистая ЗП</th>
+            <th scope="col">ФСЗН</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="el:${salaries}">
+            <th th:text="${el.salaryId}" scope="row"></th>
+            <th th:text="${el.timeSheet.timeSheetId}"></th>
+            <th th:text="${el.award}"></th>
+            <th th:text="${el.salary}"></th>
+            <th th:text="${el.tax}"></th>
+            <th th:text="${el.pension}"></th>
+            <th th:text="${el.netsalary}"></th>
+            <th th:text="${el.fszn}"></th>
+        </tr>
+        </tbody>
+    </table>
+</div>

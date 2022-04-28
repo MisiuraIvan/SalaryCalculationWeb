@@ -1,0 +1,25 @@
+<div th:fragment="employeestable">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Отчество</th>
+            <th scope="col">Должность</th>
+            <th scope="col">Логин</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="el:${employees}">
+            <th th:text="${el.userId}" scope="row"></th>
+            <th th:text="${el.firstName}"></th>
+            <th th:text="${el.lastName}"></th>
+            <th th:text="${el.middleName}"></th>
+            <th th:text="${el.post.post}"></th>
+            <th th:text="${el.login}"></th>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

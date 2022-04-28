@@ -1,0 +1,17 @@
+<div th:fragment="adminheader">
+<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+    <a  th:href="@{/admin/{id}(id=${user.userId})}" class="d-flex align-items-center text-dark text-decoration-none">
+        <span class="fs-4">Меню администратора</span>
+    </a>
+
+    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/admin/posts/{id}(id=${user.userId})}">Должности</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/admin/employees/{id}(id=${user.userId})}">Сотрудники</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/admin/dates/{id}(id=${user.userId})}">Список дат</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/admin/timesheets/{id}(id=${user.userId})}">Список табелей</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" th:href="@{/admin/salaries/{id}(id=${user.userId})}">Список ЗП</a>
+        <a class="me-1 py-2 text-dark text-decoration-none" th:href="@{/admin/analystics/{id}(id=${user.userId})}">Аналитика</a>
+        <a class="me-1 py-2 text-dark text-decoration-none" href="/">Выход</a>
+    </nav>
+</div>
+</div>
