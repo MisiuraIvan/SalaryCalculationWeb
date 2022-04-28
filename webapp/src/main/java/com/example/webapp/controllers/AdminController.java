@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -35,6 +37,26 @@ public class AdminController {
     public String analistics(@PathVariable(value="id") Long id,Model model) {
         Optional<User> user=userRepository.findById(id);
         Iterable<Date> dates=dateRepository.findAll();
+        Iterable<User> users=userRepository.findAll();
+        ArrayList<Integer> sum=new ArrayList<>();
+        int i=0;
+        for(Date el:dates){
+            sum.add(i,salaryRepository.SumByDateId(el.getDateId()));
+            i++;
+        }
+        Integer[][] usersum=new Integer[(int) users.spliterator().getExactSizeIfKnown()][((int) dates.spliterator().getExactSizeIfKnown())];
+        int j=0;
+        for(User u:users) {
+            i=0;
+            for (Date el : dates) {
+                usersum[j][i]=salaryRepository.SumByDateIdAndUserId(el.getDateId(),u.getUserId());
+                i++;
+            }
+            j++;
+        }
+        model.addAttribute("users", users);
+        model.addAttribute("usersum", usersum);
+        model.addAttribute("sum", sum);
         model.addAttribute("user", user.get());
         model.addAttribute("dates", dates);
         return "analystics";
