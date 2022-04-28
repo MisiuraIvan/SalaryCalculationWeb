@@ -34,7 +34,9 @@ public class AdminController {
     @GetMapping("/admin/analystics/{id}")
     public String analistics(@PathVariable(value="id") Long id,Model model) {
         Optional<User> user=userRepository.findById(id);
+        Iterable<Date> dates=dateRepository.findAll();
         model.addAttribute("user", user.get());
+        model.addAttribute("dates", dates);
         return "analystics";
     }
     @GetMapping("/admin/posts/{id}")
