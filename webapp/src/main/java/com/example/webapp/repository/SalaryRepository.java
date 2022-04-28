@@ -12,4 +12,6 @@ public interface SalaryRepository extends CrudRepository<Salary,Long> {
     Integer SumByDateId(Long id);
     @Query("select u.salary from Salary u where u.timeSheet.date.dateId = :#{#id} and u.timeSheet.user.userId = :#{#userId}")
     Integer SumByDateIdAndUserId(Long id,Long userId);
+    @Query("select u from Salary u where u.timeSheet.date.dateId >= :#{#startid} and u.timeSheet.date.dateId <= :#{#endid}")
+    Iterable<Salary> findByDate(Long startid,Long endid);
 }
