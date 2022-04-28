@@ -2,6 +2,7 @@ package com.example.webapp.repository;
 
 import com.example.webapp.models.Post;
 import com.example.webapp.models.Salary;
+import com.example.webapp.models.TimeSheet;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -14,4 +15,6 @@ public interface SalaryRepository extends CrudRepository<Salary,Long> {
     Integer SumByDateIdAndUserId(Long id,Long userId);
     @Query("select u from Salary u where u.timeSheet.date.dateId >= :#{#startid} and u.timeSheet.date.dateId <= :#{#endid}")
     Iterable<Salary> findByDate(Long startid,Long endid);
+    @Query("select u from Salary u where u.timeSheet.user.userId = :#{#userId}")
+    Iterable<Salary> findByUserId(Long userId);
 }
